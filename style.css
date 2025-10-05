@@ -1,0 +1,596 @@
+
+:root {
+    /* Light Mode Palette - Retained for light mode functionality */
+    --primary-color: #1e3a8a; 
+    --secondary-color: #f8fafc; 
+    --accent-color: #ef4444; 
+    --text-color: #1f2937;
+    --link-color: #2563eb; 
+    --card-bg: #fff;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-color: #e2e8f0; 
+    --table-header-bg: #dbeafe; 
+    --table-row-even-bg: #eff6ff;
+    --table-border: #bfdbfe; 
+    --hover-bg: #e0f2fe; 
+}
+
+/* Dark Mode - Netflix-inspired realistic feel */
+body.dark-mode {
+    --primary-color: #141414; /* Deep charcoal/near-black for background */
+    --secondary-color: #242424; /* Slightly lighter shade for main content */
+    --accent-color: #e50914; /* Netflix Red */
+    --text-color: #e5e5e5; /* Soft white for text */
+    --link-color: #e5e5e5;
+    --card-bg: #2b2b2b; /* Rich dark grey for card backgrounds */
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Deep, soft shadow */
+    --border-color: #333;
+    --table-header-bg: #333; /* Dark table header */
+    --table-row-even-bg: #2f2f2f; /* Darker even row */
+    --table-border: #444;
+    --hover-bg: #383838; 
+}
+
+/* General Body and Typography */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1510511459019-5da40973d657?q=80&w=2670&auto=format&fit=crop') center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 120px 20px 80px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .hero-section {
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1510511459019-5da40973d657?q=80&w=2670&auto=format&fit=crop') center/cover no-repeat;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: -0.05em;
+}
+
+.tagline {
+    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+    font-weight: 400;
+    margin-top: 15px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: background-color 0.4s ease-in-out, box-shadow 0.3s ease;
+}
+
+.dark-mode .navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+    font-size: 1.05rem;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: var(--accent-color);
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 1001;
+}
+
+.nav-toggle .bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: #fff;
+    position: relative;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    color: var(--accent-color);
+}
+
+.dark-mode-toggle .fa-sun,
+.dark-mode-toggle.active .fa-moon {
+    display: none;
+}
+
+.dark-mode-toggle.active .fa-sun {
+    display: inline-block;
+}
+
+/* General Layout & Content */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 25px;
+}
+
+.card-section {
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.4s ease-in-out, box-shadow 0.3s ease;
+}
+
+.dark-mode .card-section {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+    background: var(--secondary-color);
+}
+
+.card-section h2 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.6em;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.dark-mode .card-section h2 {
+    color: var(--text-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.search-filter-bar {
+    margin-bottom: 2.5rem;
+}
+
+#lecture-search, #lab-search, #exam-search {
+    width: 100%;
+    padding: 14px 22px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+#lecture-search::placeholder, #lab-search::placeholder, #exam-search::placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+#lecture-search:focus, #lab-search:focus, #exam-search:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Dark mode specific search bar styling */
+.dark-mode #lecture-search,
+.dark-mode #lab-search,
+.dark-mode #exam-search {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: #444;
+}
+
+.dark-mode #lecture-search:focus,
+.dark-mode #lab-search:focus,
+.dark-mode #exam-search:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    padding: 28px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Card hover realism */
+.card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode card specific styling */
+.dark-mode .card {
+    background: var(--card-bg); /* Rich dark grey */
+    box-shadow: var(--card-shadow);
+}
+
+.dark-mode .card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* More intense shadow on hover */
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.8rem;
+}
+
+.card-date {
+    font-size: 0.95rem;
+    color: var(--link-color);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.dark-mode .card-title {
+    color: var(--text-color);
+}
+
+.card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border: 2px solid var(--link-color);
+    border-radius: 50px;
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* More realistic button hover effects */
+.dark-mode .link-button {
+    border-color: #555;
+    color: var(--text-color);
+    background-color: #333;
+}
+
+.dark-mode .link-button:hover:not(.disabled) {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4); /* Glowing effect */
+}
+
+.link-button.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    border-color: var(--border-color);
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    box-shadow: none;
+}
+
+.link-button:hover:not(.disabled) {
+    background-color: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .footer {
+    background-color: var(--primary-color);
+}
+
+.footer-content a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    margin: 15px 0 10px;
+    opacity: 0.8;
+}
+
+.current-time {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Table Styling */
+.grading-rubric {
+    margin-top: 2.5rem;
+}
+
+.grading-rubric h3 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.6rem;
+    font-weight: 600;
+}
+
+.dark-mode .grading-rubric h3 {
+    color: var(--text-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+    border: 1px solid var(--table-border);
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.dark-mode .table-container {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 650px;
+}
+
+.data-table th, .data-table td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--table-border);
+    transition: background-color 0.2s ease;
+}
+
+.data-table th {
+    background-color: var(--table-header-bg);
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+}
+
+.dark-mode .data-table th {
+    color: var(--text-color);
+    background-color: var(--table-header-bg);
+}
+
+.data-table tr:nth-child(even) {
+    background-color: var(--table-row-even-bg);
+}
+
+.data-table tr:hover {
+    background-color: var(--hover-bg);
+    box-shadow: inset 3px 0 0 0 var(--accent-color);
+}
+
+.dark-mode .data-table tr:hover {
+    box-shadow: inset 3px 0 0 0 var(--accent-color);
+}
+
+/* Specific adjustments for Rubric Table */
+.rubric-table th:first-child, .rubric-table td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Mobile-Specific Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        background-color: var(--primary-color);
+        padding: 1rem 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 10px 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-link {
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .hero-section {
+        padding: 60px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .card-section {
+        padding: 1.8rem;
+    }
+
+    .card-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-filter-bar {
+        margin-bottom: 1.8rem;
+    }
+
+    #lecture-search, #lab-search, #exam-search {
+        padding: 12px 18px;
+        font-size: 0.95rem;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-title {
+        font-size: 1.15rem;
+    }
+
+    .card-links {
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .link-button {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    .footer {
+        padding: 2rem 1rem;
+    }
+
+    .grading-rubric h3 {
+        font-size: 1.4rem;
+    }
+
+    .data-table th, .data-table td {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+
+    .rubric-table th:first-child, .rubric-table td:first-child {
+        min-width: 90px;
+    }
+}
